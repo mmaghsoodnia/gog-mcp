@@ -63,7 +63,7 @@ Combine: {b,i,f=Georgia,s=18,c=#333333,a=center}
 - **`drive_delete`** — trash (or permanently delete) a file. Uses `--force` for non-interactive mode.
 - **`drive_move`** — move a file to a different folder
 - **`drive_share`** — share a file/folder (supports `anyone`, `user`, `domain` targets). Uses `--force` for non-interactive. Required for image insertion workflow.
-- **`docs_update`** — insert/replace content with optional formatting (font, color, alignment, etc.)
+- **`docs_update`** — replace (or append to) the body with **plain text**, optionally applying uniform formatting (font, size, color, alignment, line-spacing, underline, strikethrough) to all written content. Does NOT render markdown — for rich/markdown content use `docs_sed` or `docs_find_replace` with `format=markdown`.
 - **`docs_format`** — apply formatting to existing text by matching content or whole document
 - **`docs_insert`** — insert plain text at a specific position in a doc (no image support; use `docs_find_replace` for images)
 - **`docs_find_replace`** — find and replace text; with `--format markdown`, supports rich replacements including inline images via `![alt](https://url)` syntax (remote URLs only)

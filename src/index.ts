@@ -477,12 +477,11 @@ server.tool(
 
 server.tool(
   "docs_update",
-  "Update a Google Doc with content and optional formatting (font, color, alignment). Supports markdown and plain text.",
+  "Replace (or append) the body of a Google Doc with plain text, optionally applying uniform formatting (font, size, color, alignment, line spacing, underline, strikethrough) to all written content. Content is inserted literally — markdown is NOT rendered. For markdown rendering or mixed formatting, use docs_sed or docs_find_replace with format=markdown.",
   {
     doc_id: z.string().describe("Google Doc ID"),
-    content: z.string().describe("Content to write (markdown or plain text)"),
-    format: z.enum(["plain", "markdown"]).optional().default("markdown").describe("Content format"),
-    append: z.boolean().optional().default(false).describe("Append instead of replacing all content"),
+    content: z.string().describe("Plain text content to write. Not parsed as markdown."),
+    append: z.boolean().optional().default(false).describe("Append to existing body instead of replacing it"),
     font_family: z.string().optional().describe("Font family (e.g. Arial, Georgia, Times New Roman)"),
     font_size: z.number().optional().describe("Font size in points (e.g. 12, 14, 16)"),
     text_color: z.string().optional().describe("Text color as hex (#RRGGBB)"),
@@ -493,10 +492,10 @@ server.tool(
     line_spacing: z.number().optional().describe("Line spacing percentage (e.g. 150 = 1.5x)"),
     account: accountParam,
   },
-  async ({ doc_id, content, format, append, font_family, font_size, text_color, bg_color, alignment, underline, strikethrough, line_spacing, account }) =>
+  async ({ doc_id, content, append, font_family, font_size, text_color, bg_color, alignment, underline, strikethrough, line_spacing, account }) =>
     text(
       await withTempFile(content, async (path) => {
-        const args = ["docs", "update", doc_id, "--content-file", path, "--format", format ?? "markdown"];
+        const args = ["docs", "write", doc_id, "--file", path];
         if (append) args.push("--append");
         if (font_family) args.push("--font-family", font_family);
         if (font_size) args.push("--font-size", String(font_size));
