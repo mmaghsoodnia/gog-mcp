@@ -1,0 +1,28 @@
+# gog-mcp configuration
+# Copy this file to gog.config and fill in your values.
+# gog.config is gitignored — never commit it.
+
+# ── 1Password settings ───────────────────────────────────────────────────────
+# The vault where your Google Workspace secrets are stored
+OP_VAULT="MyVault"
+
+# Your 1Password account subdomain
+#   Personal:  my.1password.com
+#   Business:  yourcompany.1password.com
+OP_ACCOUNT="my.1password.com"
+
+# ── 1Password item names ─────────────────────────────────────────────────────
+# Change these only if you renamed items in 1Password (defaults match gog README)
+OP_ITEM_OAUTH="Google Workspace OAuth"
+OP_ITEM_TOKENS="GOG OAuth Tokens"
+OP_ITEM_KEYRING_PW="GOG Keyring Password"
+
+# ── Google Workspace ─────────────────────────────────────────────────────────
+# The Google account this deployment acts as (used for auth token lookup)
+# For a shared corporate agent, set this to the agent email (e.g. agent@company.com)
+# For personal use, set to your own Google account email
+GOG_ACCOUNT="you@example.com"
+
+# ── gog binary path (optional) ───────────────────────────────────────────────
+# Defaults to /opt/homebrew/bin/gog (Homebrew). Override if built from source:
+# GOG_PATH="/Users/YOU/Projects/gogcli/gog"
